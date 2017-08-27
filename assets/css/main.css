@@ -3202,20 +3202,27 @@
 .fnList > .function{
 	overflow:hidden;
 	display: flex;
-	background-color: #f3f6fa;
+	background-color: #7a7a7a;
+	margin-bottom:30px;
 }
 .fnList > .function > .capture-image{
-	width:40%;
-	float:left;
+	width:50%;
 	display:inline-block;
 }
 .fnList > .function > .content{
-	width:calc(60% - 20px);
+	width:calc(50% - 20px);
 	float:right;
-	padding:10px;
-	color: #7c8081;
 	align-items: stretch;
 	flex: 1;
+	color: #ffffff;
+	margin: 0 10px;
+	position: relative;
+}
+
+.fnList > .function > .content > p{
+	position: absolute;
+	top:38%;
+	margin: 0;
 }
 
 .fnList > .function > .content > p > strong{
