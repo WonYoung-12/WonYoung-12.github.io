@@ -131,9 +131,11 @@
 									<header>
 										<h3>Android</h3>
 									</header>
-									<p>Pet Advisor는 Android App입니다.<br/>
-									RecyclerView, CardView 등의 <br/> 기본적인 것부터 Retrofit2, Gson Converter, Parcelor, ButterKnife, Glide, Firebase 등<br/>
-									다양한 Open Source까지 활용하였습니다.</p>
+									<p align="left">Pet Advisor는 Android App입니다.
+										RecyclerView, CardView 등의 기본적인 내용부터
+										Retrofit2, Gson Converter, Parcelor, ButterKnife, Glide, Firebase 등<br/>
+										다양한 Open Source까지 활용하였습니다.<br/>
+								  </p>
 								</section>
 
 							</div>
@@ -144,9 +146,10 @@
 									<header>
 										<h3>Node.js</h3>
 									</header>
-									<p>Pet Advisor의 Server는<br/> Node.js를 통해 구축하였습니다.<br/>
-										Express라는 프레임 워크와 body-parser<br/>
-										미들웨어를 활용하였고 multer, file system 등의 모듈을 활용하였습니다.
+									<p align="left">
+										Pet Advisor의 Server는 Node.js를 통해 구축하였습니다.
+										기본적으로 비동기 IO 처리 방식이기 때문에 성능이 빠른 것이 장점입니다.<br/>
+										Express라는 프레임 워크와 body-parser 미들웨어를 활용하였고 multer, file system 등의 모듈을 활용하였습니다.
 									</p>
 								</section>
 
@@ -158,13 +161,17 @@
 									<header>
 										<h3>MariaDB</h3>
 									</header>
-									<p>Database Server로 오픈소스 DBMS인 MariaDB를 사용하였습니다.<br/>
-									오픈소스이기 때문에 누구나 무료로 사용할 수 있으며, MySQL 기반으로 개발한 RDBMS이기 때문에 MySQL과 사용법이 동일합니다. </p>
+									<p align="left">
+										Database Server로 오픈소스 DBMS인 MariaDB를 사용하였습니다.
+										오픈소스이기 때문에 누구나 무료로 사용할 수 있으며, MySQL 기반으로 개발한 RDBMS이기 때문에 MySQL과 사용법이 동일합니다. </p>
 								</section>
 
 							</div>
 						</div>
+
+
 					</section>
+
 				</article>
 
 				<article id="function">
@@ -292,6 +299,76 @@
 
 					</section>
 				</article>
+
+				<br/>
+				<br/>
+
+				<section class="wrapper style1 container special" style="marin: 30px auto;">
+					<h2><strong>Technique & Trouble Shotting</strong></h2>
+					<div class="row">
+						<div class="4u 12u(narrower)">
+
+							<section>
+								<header>
+									<h2>In Android</h2>
+								</header>
+								<p align="left">
+									ViewPager와 Fragment 사용이 익숙치 않아 웹 서버에서 받아오는 데이터를 기반으로 화면 갱신이 제대로 이루어지지 않았다.<br/>
+								 	<strong>-> ViewPager의 setOffscreenPageLimit 메소드를 통해 모든 프래그먼트를 처음에 생성 및 Adapter를 새로 바꾸어줌.</strong>
+							  </p>
+								<p align="left">
+									LoginActivity에서 MainActivity로 화면 전환을 위해 startActivity를 호출해 주는데 MainActivity가 여러번 실행됨.<br/>
+								 	<strong>-> Manifest의 launchMode = "singleTop", taskAffinity="" 속성을 부여하여 해결.</strong>
+							  </p>
+								<p align="left">
+									RecyclerView의 아이템중에서 몇 개만 보여주고 다른 아이템은 visibility를 gone으로 설정 했는데 공간을 차지.<br/>
+								 	<strong>-> 화면에 보여줄 List를 새로 생성한 후 버튼 클릭 이벤트마다 아이템 추가 후 화면 갱신을 통해 해결.</strong>
+							  </p>
+							</section>
+
+						</div>
+						<div class="4u 12u(narrower)">
+
+							<section>
+								<header>
+									<h2>In Node.js(웹서버)</h2>
+								</header>
+								<p align="left">
+									로컬 서버 구축 시 커넥션이 끊기는 등, 통신이 원활하지 않음.<br/>
+								 	<strong>-> 고정 ip를 갖는 서버를 구축하여 해결.</strong>
+								</p>
+								<p align="left">
+									안드로이드로부터의 파일 수신을 위해 multer 모듈을 사용하는데 req.field 방식으로 값을 가져오지 못함.
+								 	<strong>-> req["field"] 방식으로 값을 참조할 수 있었음.</strong>
+								</p>
+								<p align="left">
+									MariaDB 서버에 imagePath 전송하는데 imagePath에 \가 포함 되어 있어 정상적으로 저장되지 않음.
+								 	<strong>-> replace 메소드를 통해 \\를 \\\\로 바꾸어줌.</strong>
+								</p>
+							</section>
+
+						</div>
+						<div class="4u 12u(narrower)">
+
+							<section>
+								<header>
+									<h2>In MariaDB</h2>
+								</header>
+								<p align="left">
+									MariaDB는 RDBMS이기 때문에 동일한 이름을 갖는 칼럼을 여러개 가질 수 없음.<br/>
+								 	<strong>-> 칼럼 명과 동일한 새로운 테이블을 생성 후에 클라이언트가 요청하면 조인을 통해 데이터를 전송해줌.</strong>
+								</p>
+								<p align="left">
+									List 내에 List가 있어 클라이언트가 List 사이즈만큼 루프를 돌면서 서버에 계속 요청해 성능이 떨어짐.<br/>
+								 	<strong>-> 테이블 간 조인과 MySQL 함수인 GROUP_CONCAT을 통해 한 번의 요청으로 모든 데이터를 받아올 수 있게 됨.</strong>
+								</p>
+							</section>
+
+						</div>
+					</div>
+
+
+				</section>
 
 				<article id="review">
 					<section id="cta">
